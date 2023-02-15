@@ -6,8 +6,8 @@ A Scinan integration node for Node Red. It provides the ability to control therm
 Based on Petter Ruud's implementation for Homey. Check it out: https://github.com/PetterRuud/com.scinan.api/
 
 ## Supported devices
-### ProSmart
-- PTS50W
+### 智能插排
+- S3 001
 
 ## Setup
 Use the configuration node to provide credentials for your Smart-E account. The device node can request thermostats from the server.
