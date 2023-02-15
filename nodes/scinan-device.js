@@ -9,7 +9,7 @@ module.exports = function(RED) {
         this.server = RED.nodes.getNode(config.server);
         this.device_id = config.device;
 
-        node.status({fill:"grey", shape:"ring", text:"-°C"});
+        node.status({fill:"grey", shape:"ring", text:"-V"});
         
         if (this.server) {
             var api = new scinan({
@@ -17,19 +17,19 @@ module.exports = function(RED) {
                 password: this.server.credentials.password
             });
         } else {
-            node.status({fill:"red", shape:"ring", text:"-°C"});
+            node.status({fill:"red", shape:"ring", text:"-V"});
             var api = new scinan();
         }
 
         api.on('authenticated', function() {
             console.log("API authenticated");
-            node.status({fill:"green", shape:"fill", text:"-°C"});
+            node.status({fill:"green", shape:"fill", text:"-V"});
         })
 
         api.on('get-device-info', function(err, status) {
             console.log("Status event");
             console.log(status);
-            node.status({fill:"green", shape:"dot", text:status.measure_temperature+"°C"});
+            node.status({fill:"green", shape:"dot", text:status.measure_temperature+"V"});
         })
         
         node.on('input', function(msg) {
