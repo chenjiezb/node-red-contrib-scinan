@@ -36,6 +36,7 @@ module.exports.valueToMode = mode => {
     return value;
   }
 
+/****
 module.exports.getStatus = status => {
     const statusSplit = status.split(',');
     // status[0] = 1564834881996 => time
@@ -60,4 +61,27 @@ module.exports.getStatus = status => {
       mode: Number(statusSplit[9]),
     };
   };
+****/
 
+module.exports.getStatus = status => {
+    const statusSplit = status.split(',');
+    // status[0] = 1564834881996 => time
+    // status[1] = 1 => 开关状态is_on (hvac)
+    // status[2] = 26.5 => 电压
+    // status[3] = 16.0 => 电流
+    // status[4] = 0 => 功率
+    // status[5] = 1 => 工作模式：手动、定时
+    // status[6] = 1 => 电度值（用电量）
+    // status[7] = 0 =>
+    // status[8] = 0 =>
+  
+    return {
+      time: new Date(Number(statusSplit[0])),
+      onoff: statusSplit[1] === '1' ? true : false,
+      voltage: parseInt(statusSplit[2]),
+      current: parseInt(statusSplit[3]),
+      power: parseInt(statusSplit[4]),
+      mode: statusSplit[5] === '1' ? '定时' : '手动',
+      kwh: parseInt(statusSplit[6])
+    };
+  };
